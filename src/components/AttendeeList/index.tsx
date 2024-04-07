@@ -30,6 +30,13 @@ type Attendees = {
   checkInAt?: string;
 };
 
+type Response = {
+  attendees: Attendees[];
+  quantityPages: number;
+  count: number;
+  showing: number;
+};
+
 export function AttendeeList() {
   const { getSearchParam, pushStateUrl } = useSearchParams();
 
@@ -43,7 +50,6 @@ export function AttendeeList() {
   });
 
   const { go, next, page, prev } = usePaginate({
-    quantityItems,
     quantityPages,
   });
 
@@ -61,12 +67,7 @@ export function AttendeeList() {
         go(1);
       }
 
-      const response: {
-        attendees: Attendees[];
-        quantityPages: number;
-        count: number;
-        showing: number;
-      } = await (await fetch(url)).json();
+      const response: Response = await (await fetch(url)).json();
       setQuantityPages(response.quantityPages);
       setQuantityItems(response.count);
       setItems(response.attendees);

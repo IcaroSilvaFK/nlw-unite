@@ -3,7 +3,6 @@ import { useSearchParams } from './useSearchParams'
 
 type Props = {
   quantityPages: number,
-  quantityItems: number,
 }
 
 export function usePaginate(props: Props) {
@@ -22,9 +21,13 @@ export function usePaginate(props: Props) {
 
 
   const go = useCallback((page: number) => {
+    if (page < 1 || page > quantityPages) {
+      console.log("is not valid")
+      throw new Error(`This page ${page} is not valid.`)
+    }
     setPage(page)
     pushStateUrl("page", String(page))
-  }, [pushStateUrl])
+  }, [pushStateUrl, quantityPages])
 
   const next = useCallback(() => {
     const newValue = page <= quantityPages ? page + 1 : page
