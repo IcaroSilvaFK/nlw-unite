@@ -1,6 +1,8 @@
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 
-export function useDebounce<T>({ value, time = 1000 }: { value: T | (() => T); time?: number; }): [
+export type UseDebounceProps<T> = { value: T | (() => T); time?: number; }
+
+export function useDebounce<T>({ value, time = 1000 }: UseDebounceProps<T>): [
   T, T, Dispatch<SetStateAction<T>>
 ] {
   const [realValue, setRealValue] = useState(value)

@@ -75,7 +75,7 @@ export function AttendeeList() {
   }, [page, debouncedSearch, pushStateUrl, go]);
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4" data-testid="attendees">
       <div className="flex items-center gap-3">
         <h1 className="text-2xl font-bold">Participantes</h1>
         <div className="px-3 py-1.5 rounded-lg border border-white/10 bg-transparent text-sm w-72 flex items-center gap-3">
@@ -111,6 +111,7 @@ export function AttendeeList() {
             <tr
               key={item.id}
               className="border-b border-white/10 hover:bg-slate-100/10 transition"
+              data-testid="tablerow"
             >
               <TableData>
                 <input
